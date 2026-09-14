@@ -831,3 +831,14 @@ Before creating a new component, style, utility, or structure:
 3. Only create something new when necessary.
 
 This keeps CyberMentor consistent.
+
+## Routing Rules
+
+- All routes belong to the whole CyberMentor application.
+- Each teammate builds only their assigned pages.
+- Add a page to `App.jsx` only after that page component has been created and has a `default export`.
+- Do not import empty page files into `App.jsx`.
+- Add the route when the page is ready.
+- Do not delete or overwrite another teammate's routes.
+- Before modifying `App.jsx`, pull the latest `main` branch.
+- If a route conflict occurs during merging, resolve it carefully without removing another teammate's work.
