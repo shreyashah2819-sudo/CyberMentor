@@ -35,41 +35,15 @@ function PasswordStrengthPage() {
 
   /* ---------------- PASSWORD ANALYSIS ---------------- */
 
-  const analyzePassword = (value) => {
-
-    let score = 0;
-
-    if (value.length >= 8) score += 20;
-    if (value.length >= 12) score += 15;
-    if (/[A-Z]/.test(value)) score += 15;
-    if (/[a-z]/.test(value)) score += 10;
-    if (/[0-9]/.test(value)) score += 15;
-    if (/[^A-Za-z0-9]/.test(value)) score += 15;
-    if (value.length >= 16) score += 10;
-
-    if (score > 100) score = 100;
-
-    let level = "Very Weak";
-
-    if (score >= 80) {
-      level = "Very Strong";
-    } else if (score >= 60) {
-      level = "Strong";
-    } else if (score >= 40) {
-      level = "Medium";
-    } else if (score >= 20) {
-      level = "Weak";
-    }
-
-    return {
-      score,
-      level,
-    };
-  };
+  
 
 
-  const analysis = analyzePassword(password);
+const [analysis, setAnalysis] = useState({
+  score: 0,
+  level: "Very Weak",
+});
 
+console.log("Password analysis state:", analysis);
 
   /* ---------------- REQUIREMENTS ---------------- */
 
@@ -404,7 +378,43 @@ function PasswordStrengthPage() {
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={async (e) => {
+  const value = e.target.value;
+
+  setPassword(value);
+
+  if (!value) {
+    setAnalysis({
+      score: 0,
+      level: "Very Weak",
+    });
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      "http://127.0.0.1:8000/api/password/check",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          password: value,
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    setAnalysis({
+      score: data.score,
+      level: data.strength,
+    });
+  } catch (error) {
+    console.error("Password analysis failed:", error);
+  }
+}}
                   placeholder="Enter your password..."
                 />
 

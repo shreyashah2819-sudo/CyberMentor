@@ -1,464 +1,456 @@
 import { useState } from "react";
-
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Shield,
   ArrowLeft,
   CheckCircle,
   XCircle,
-  Zap,
 } from "lucide-react";
 
-function CyberSimulationMissionPage() {
-  const currentPath = window.location.pathname;
+import "../App.css";
 
-  const isOTPMission =
-    currentPath === "/cyber-simulations/otp-scam";
+const missions = {
+  "fake-bank-email": {
+    title: "Fake Bank Email",
+    missionNumber: "MISSION 01",
+    description: "Identify a suspicious banking email.",
+    reward: "+100 XP",
+    completionKey: "fakeBankEmailCompleted",
+    scenarioTitle: "You receive a suspicious banking email.",
+    from: "Bank Security",
+    subject: "Urgent: Verify your bank account",
+    emailBody: (
+      <>
+        <p>Dear Customer,</p>
+        <p>
+          Your bank account requires immediate verification.
+        </p>
+        <p>
+          Click the link below to verify your account.
+        </p>
+        <button type="button" className="simulation-email-link">
+          Verify Account
+        </button>
+        <p>Bank Security Team</p>
+      </>
+    ),
+    question: "What is the safest response to this email?",
+    options: [
+      "Click the verification link immediately.",
+      "Reply with your banking password.",
+      "Ignore the link and verify your account through the official bank website or app.",
+      "Forward the email to your friends.",
+    ],
+    correctAnswer:
+      "Ignore the link and verify your account through the official bank website or app.",
+  },
 
-  const mission = isOTPMission
-    ? {
-        title: "OTP Scam",
-        missionNumber: "MISSION 02",
-        description:
-          "Can you identify the safest response to an OTP scam?",
-        reward: "+100 XP",
-        completionKey: "otpScamCompleted",
+  "otp-scam": {
+    title: "OTP Scam",
+    missionNumber: "MISSION 02",
+    description: "Identify a suspicious OTP request.",
+    reward: "+100 XP",
+    completionKey: "otpScamCompleted",
+    scenarioTitle: "You receive a message asking for your OTP.",
+    from: "Bank Support",
+    subject: "Your OTP is required",
+    emailBody: (
+      <>
+        <p>Bank Support</p>
+        <p>
+          We detected unusual activity on your account.
+        </p>
+        <p>
+          Send us the OTP you received to secure your account.
+        </p>
+        <p>Act immediately to avoid account suspension.</p>
+      </>
+    ),
+    question: "What should you do?",
+    options: [
+      "Share the OTP with the support team.",
+      "Send the OTP only if they know your name.",
+      "Never share the OTP and contact the bank through an official channel.",
+      "Post the OTP in the support chat.",
+    ],
+    correctAnswer:
+      "Never share the OTP and contact the bank through an official channel.",
+  },
 
-        scenarioTitle:
-          "You've received a message asking for your OTP.",
+  "fake-whatsapp": {
+    title: "Fake WhatsApp",
+    missionNumber: "MISSION 03",
+    description: "Identify a fake WhatsApp security message.",
+    reward: "+80 XP",
+    completionKey: "fakeWhatsappCompleted",
+    scenarioTitle:
+      "You receive a suspicious WhatsApp security message.",
+    from: "WhatsApp Security",
+    subject: "Your WhatsApp account will be blocked!",
+    emailBody: (
+      <>
+        <p>WhatsApp Security Team</p>
 
-        from: "BANK-ALERT",
-        subject: "URGENT: OTP Verification Required",
+        <p>
+          Your WhatsApp account has been selected for
+          verification.
+        </p>
 
-        emailBody: (
-          <>
-            <p>Dear Customer,</p>
-
-            <p>
-              We noticed a problem with your recent
-              transaction.
-            </p>
-
-            <p>
-              To cancel the transaction, please share the OTP
-              you receive on your registered mobile number.
-            </p>
-
-            <button
-              type="button"
-              className="simulation-email-link"
-            >
-              Verify Transaction
-            </button>
-
-            <p>
-              Thank you,
-              <br />
-              Bank Security Team
-            </p>
-          </>
-        ),
-
-        question:
-          "What should you do if someone asks for your OTP?",
-
-        answers: [
-          {
-            id: "A",
-            text: "Share the OTP because the message looks urgent.",
-          },
-          {
-            id: "B",
-            text: "Call the person and tell them the OTP.",
-          },
-          {
-            id: "C",
-            text: "Never share the OTP and contact your bank through an official channel.",
-          },
-          {
-            id: "D",
-            text: "Forward the OTP message to someone you trust.",
-          },
-        ],
-
-        correctAnswer: "C",
-
-        correctMessage:
-          "Excellent! You protected your OTP.",
-
-        correctExplanation:
-          "Never share an OTP with anyone. Banks and legitimate services do not need you to tell them your OTP. If you are concerned about a transaction, contact the bank using an official channel.",
-
-        wrongMessage:
-          "Not quite! Think about why OTPs should stay private.",
-
-        wrongExplanation:
-          "An OTP is meant to be used only by the account holder. Never share it with callers, messages, or people claiming to be from your bank.",
-      }
-    : {
-        title: "Fake Bank Email",
-        missionNumber: "MISSION 01",
-        description:
-          "Can you identify the signs of a phishing email?",
-        reward: "+100 XP",
-        completionKey: "fakeBankEmailCompleted",
-
-        scenarioTitle:
-          "You've received an urgent bank email.",
-
-        from: "security@yourbank-alert.com",
-        subject:
-          "URGENT: Your account will be suspended!",
-
-        emailBody: (
-          <>
-            <p>Dear Customer,</p>
-
-            <p>
-              We detected unusual activity on your bank
-              account. Your account will be suspended within
-              24 hours.
-            </p>
-
-            <p>
-              Click the link below immediately to verify your
-              account and prevent suspension.
-            </p>
-
-            <button
-              type="button"
-              className="simulation-email-link"
-            >
-              Verify My Account
-            </button>
-
-            <p>
-              Thank you,
-              <br />
-              Your Bank Security Team
-            </p>
-          </>
-        ),
-
-        question: "What should you do?",
-
-        answers: [
-          {
-            id: "A",
-            text: "Click the link and verify your account immediately.",
-          },
-          {
-            id: "B",
-            text: "Reply to the email and ask if it is genuine.",
-          },
-          {
-            id: "C",
-            text: "Ignore the email and independently contact your bank.",
-          },
-          {
-            id: "D",
-            text: "Forward the email to friends to warn them.",
-          },
-        ],
-
-        correctAnswer: "C",
-
-        correctMessage:
-          "Excellent! You spotted the phishing attempt.",
-
-        correctExplanation:
-          "Never use a suspicious email link to access your bank account. Instead, contact your bank using an official website, app, or phone number.",
-
-        wrongMessage:
-          "Not quite! Think about the safest response.",
-
-        wrongExplanation:
-          "The email creates urgency and asks you to use a link. A safer approach is to avoid the link and contact your bank through an official channel.",
-      };
-
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [submitted, setSubmitted] = useState(false);
-
-  const isCorrect =
-    selectedAnswer === mission.correctAnswer;
-
-  function handleSubmit() {
-    if (!selectedAnswer) {
-      return;
-    }
-
-    setSubmitted(true);
-
-    if (isCorrect) {
-      localStorage.setItem(
-        mission.completionKey,
-        "true"
-      );
-    }
-  }
-
-  function handleRetry() {
-    setSelectedAnswer(null);
-    setSubmitted(false);
-  }
-
-  return (
-    <div className="simulation-mission-page">
-
-      {/* HEADER */}
-      <header className="simulation-mission-header">
+        <p>
+          Your account will be blocked within 24 hours
+          unless you verify it immediately.
+        </p>
 
         <button
           type="button"
+          className="simulation-email-link"
+        >
+          Verify WhatsApp Account
+        </button>
+
+        <p>WhatsApp Support Team</p>
+      </>
+    ),
+    question:
+      "What is the safest response to this message?",
+    options: [
+      "Click the verification link immediately.",
+      "Reply with your WhatsApp OTP.",
+      "Ignore the link and verify your account only through the official WhatsApp app.",
+      "Forward the message to your contacts.",
+    ],
+    correctAnswer:
+      "Ignore the link and verify your account only through the official WhatsApp app.",
+  },
+
+  "qr-scam": {
+  title: "QR Code Scam",
+  missionNumber: "MISSION 04",
+  description: "Identify a suspicious QR code message.",
+  reward: "+80 XP",
+  completionKey: "qrScamCompleted",
+
+  scenarioTitle:
+    "You receive a suspicious QR code message.",
+
+  from: "Reward Center",
+  subject: "Congratulations! Claim your reward",
+
+  emailBody: (
+    <>
+      <p>Congratulations!</p>
+
+      <p>
+        You have been selected to receive a special reward.
+      </p>
+
+      <p>
+        Scan the QR code below to claim your reward.
+      </p>
+
+      <div className="simulation-qr-placeholder">
+        QR CODE
+      </div>
+
+      <p>
+        Scan now before the reward expires.
+      </p>
+    </>
+  ),
+
+  question:
+    "What is the safest action?",
+
+  options: [
+    "Scan the QR code immediately.",
+    "Share the QR code with a friend.",
+    "Avoid scanning it and verify the message independently.",
+    "Enter your bank details after scanning.",
+  ],
+
+  correctAnswer:
+    "Avoid scanning it and verify the message independently.",
+},
+  "fake-job-offer": {
+    title: "Fake Job Offer",
+    missionNumber: "MISSION 04",
+    description: "Identify a suspicious job offer.",
+    reward: "+80 XP",
+    completionKey: "fakeJobOfferCompleted",
+    scenarioTitle:
+      "You receive an unexpected job offer message.",
+    from: "HR Recruitment",
+    subject: "Congratulations! You are selected",
+    emailBody: (
+      <>
+        <p>Congratulations!</p>
+        <p>
+          You have been selected for an online job.
+        </p>
+        <p>
+          Pay a small registration fee to continue.
+        </p>
+        <button
+          type="button"
+          className="simulation-email-link"
+        >
+          Complete Registration
+        </button>
+      </>
+    ),
+    question:
+      "What is the safest response to this offer?",
+    options: [
+      "Pay the registration fee.",
+      "Send your bank details.",
+      "Verify the company independently before providing information or money.",
+      "Forward your identity documents immediately.",
+    ],
+    correctAnswer:
+      "Verify the company independently before providing information or money.",
+  },
+
+  
+
+  "usb-attack": {
+    title: "USB Attack",
+    missionNumber: "MISSION 05",
+    description:
+      "Respond safely to an unknown USB device.",
+    reward: "+80 XP",
+    completionKey: "usbAttackCompleted",
+    scenarioTitle:
+      "You find an unknown USB device near your computer.",
+    from: "Unknown Device",
+    subject: "USB device found",
+    emailBody: (
+      <>
+        <p>An unknown USB device has been found.</p>
+        <p>
+          It may contain files that automatically run
+          when connected.
+        </p>
+        <p>
+          Your computer is currently available.
+        </p>
+      </>
+    ),
+    question:
+      "What is the safest action?",
+    options: [
+      "Plug it into your computer to identify the owner.",
+      "Open the files on another computer.",
+      "Do not connect it and report it to the appropriate person.",
+      "Connect it after disabling antivirus.",
+    ],
+    correctAnswer:
+      "Do not connect it and report it to the appropriate person.",
+  },
+};
+
+function CyberSimulationMissionPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const missionId = location.pathname.split("/").pop();
+  const mission = missions[missionId];
+
+  const [selectedAnswer, setSelectedAnswer] =
+    useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
+
+  if (!mission) {
+    return (
+      <div className="simulation-mission-page">
+        <h1>Mission Not Found</h1>
+
+        <button
           onClick={() =>
-            (window.location.href =
-              "/cyber-simulations")
+            navigate("/cyber-simulations")
+          }
+        >
+          Back to Cyber Simulations
+        </button>
+      </div>
+    );
+  }
+
+ const handleSubmit = async () => {
+  if (!selectedAnswer) {
+    return;
+  }
+
+  const correct =
+    selectedAnswer === mission.correctAnswer;
+
+  setIsCorrect(correct);
+  setSubmitted(true);
+
+  if (correct) {
+    localStorage.setItem(
+      mission.completionKey,
+      "true"
+    );
+
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/missions/complete",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id: 1,
+            mission_key: missionId,
+            completed: true,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      console.log("Mission completion saved:", data);
+    } catch (error) {
+      console.error(
+        "Failed to save mission completion:",
+        error
+      );
+    }
+  }
+};
+
+  const handleRetry = () => {
+    setSelectedAnswer("");
+    setSubmitted(false);
+    setIsCorrect(false);
+  };
+
+  return (
+    <div className="simulation-mission-page">
+      <header className="simulation-mission-topbar">
+        <button
+          className="simulation-mission-back"
+          onClick={() =>
+            navigate("/cyber-simulations")
           }
         >
           <ArrowLeft size={18} />
-          Back to Simulations
+          Back to Missions
         </button>
 
         <div className="simulation-mission-logo">
-          <Shield size={20} />
-          <strong>CYBERMENTOR</strong>
+          <Shield size={22} />
+          <span>CyberMentor</span>
         </div>
-
-        <div className="simulation-mission-xp">
-          ⚡ 2,450 XP
-        </div>
-
       </header>
 
+      <main className="simulation-mission-main">
+        <section className="simulation-mission-header">
+          <p className="simulation-mission-number">
+            {mission.missionNumber}
+          </p>
 
-      {/* MAIN */}
-      <main className="simulation-mission-content">
+          <h1>{mission.title}</h1>
 
-        <div className="simulation-mission-badge">
-          Beginner Mission
-        </div>
+          <p>{mission.description}</p>
 
-        <h1>{mission.title}</h1>
-
-        <p className="simulation-mission-subtitle">
-          {mission.description}
-        </p>
-
-
-        {/* SCENARIO */}
-        <section className="simulation-scenario-card">
-
-          <div className="simulation-scenario-header">
-
-            <div>
-
-              <span>
-                {mission.missionNumber}
-              </span>
-
-              <h2>
-                {mission.scenarioTitle}
-              </h2>
-
-            </div>
-
-            <div className="simulation-mission-reward">
-              ⚡ {mission.reward}
-            </div>
-
+          <div className="simulation-mission-reward">
+            {mission.reward}
           </div>
+        </section>
 
+        <section className="simulation-scenario">
+          <h2>{mission.scenarioTitle}</h2>
 
-          {/* EMAIL / MESSAGE */}
-          <div className="simulation-email">
-
+          <div className="simulation-email-card">
             <div className="simulation-email-header">
-              <strong>From:</strong>
+              <strong>{mission.from}</strong>
 
-              <span>
-                {mission.from}
-              </span>
+              <span>{mission.subject}</span>
             </div>
-
-
-            <div className="simulation-email-header">
-              <strong>Subject:</strong>
-
-              <span>
-                {mission.subject}
-              </span>
-            </div>
-
 
             <div className="simulation-email-body">
-
               {mission.emailBody}
-
             </div>
+          </div>
+        </section>
 
+        <section className="simulation-question">
+          <h2>{mission.question}</h2>
+
+          <div className="simulation-options">
+            {mission.options.map((option) => (
+              <button
+                key={option}
+                className={`simulation-option ${
+                  selectedAnswer === option
+                    ? "selected"
+                    : ""
+                }`}
+                onClick={() =>
+                  !submitted &&
+                  setSelectedAnswer(option)
+                }
+                disabled={submitted}
+              >
+                <span>{option}</span>
+              </button>
+            ))}
           </div>
 
-
-          {/* QUESTION */}
           {!submitted && (
-            <div className="simulation-question">
-
-              <h2>
-                {mission.question}
-              </h2>
-
-              <p>
-                Choose the safest action for this
-                situation.
-              </p>
-
-
-              <div className="simulation-choice-list">
-
-                {mission.answers.map((answer) => (
-
-                  <button
-                    key={answer.id}
-                    type="button"
-                    className={
-                      selectedAnswer === answer.id
-                        ? "selected"
-                        : ""
-                    }
-                    onClick={() =>
-                      setSelectedAnswer(answer.id)
-                    }
-                  >
-
-                    <span>
-                      {answer.id}
-                    </span>
-
-                    {answer.text}
-
-                  </button>
-
-                ))}
-
-              </div>
-
-            </div>
+            <button
+              className="simulation-submit-button"
+              onClick={handleSubmit}
+              disabled={!selectedAnswer}
+            >
+              Submit Answer
+            </button>
           )}
 
-
-          {/* SUBMIT */}
-          {!submitted && (
-            <div className="simulation-mission-footer">
-
-              <div>
-
-                <CheckCircle size={17} />
-
-                <span>
-                  {selectedAnswer
-                    ? `Answer ${selectedAnswer} selected`
-                    : "Choose one answer to continue"}
-                </span>
-
-              </div>
-
-
-              <button
-                type="button"
-                className="simulation-submit-button"
-                disabled={!selectedAnswer}
-                onClick={handleSubmit}
-              >
-                Submit Answer
-              </button>
-
-            </div>
-          )}
-
-
-          {/* RESULT */}
           {submitted && (
             <div
               className={`simulation-result ${
-                isCorrect
-                  ? "simulation-result-correct"
-                  : "simulation-result-wrong"
+                isCorrect ? "correct" : "wrong"
               }`}
             >
-
-              <div className="simulation-result-icon">
-
-                {isCorrect ? (
-                  <CheckCircle size={28} />
-                ) : (
-                  <XCircle size={28} />
-                )}
-
-              </div>
-
-
-              <div className="simulation-result-content">
-
-                <h2>
-                  {isCorrect
-                    ? mission.correctMessage
-                    : mission.wrongMessage}
-                </h2>
-
-
-                <p>
-                  {isCorrect
-                    ? mission.correctExplanation
-                    : mission.wrongExplanation}
-                </p>
-
-
-                {isCorrect && (
-                  <div className="simulation-earned-xp">
-
-                    <Zap size={17} />
-
-                    {mission.reward} earned
-
+              {isCorrect ? (
+                <>
+                  <CheckCircle size={24} />
+                  <div>
+                    <h3>Mission Completed!</h3>
+                    <p>
+                      You identified the safe response.
+                      You earned {mission.reward}.
+                    </p>
                   </div>
-                )}
-
-              </div>
-
-
-              <div className="simulation-result-actions">
-
-                {isCorrect ? (
-
-                  <button
-                    type="button"
-                    onClick={() =>
-                      (window.location.href =
-                        "/cyber-simulations")
-                    }
-                  >
-                    Back to Missions
-                  </button>
-
-                ) : (
-
-                  <button
-                    type="button"
-                    onClick={handleRetry}
-                  >
-                    Try Again
-                  </button>
-
-                )}
-
-              </div>
-
+                </>
+              ) : (
+                <>
+                  <XCircle size={24} />
+                  <div>
+                    <h3>Not Quite</h3>
+                    <p>
+                      Review the scenario and try again.
+                    </p>
+                  </div>
+                </>
+              )}
             </div>
           )}
 
+          {submitted && !isCorrect && (
+            <button
+              className="simulation-retry-button"
+              onClick={handleRetry}
+            >
+              Try Again
+            </button>
+          )}
         </section>
-
       </main>
-
     </div>
   );
 }

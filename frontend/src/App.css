@@ -5841,3 +5841,368 @@
     width: 100%;
   }
 }
+
+/* MALWARE ANALYZER */
+
+.malware-analyzer-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.malware-analyzer-page h1 {
+  margin-bottom: 10px;
+}
+
+.malware-analyzer-page > p {
+  color: #66667A;
+  margin-bottom: 24px;
+}
+
+.malware-upload-box {
+  background: #FFFFFF;
+  border: 1px solid #E9ECF6;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(30, 30, 60, 0.06);
+}
+
+.malware-file-input {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.malware-analyze-button {
+  background: #7C3AED;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.malware-analyze-button:hover {
+  opacity: 0.9;
+}
+
+.malware-file-name {
+  margin-top: 16px;
+  color: #66667A;
+}
+
+.malware-result {
+  margin-top: 24px;
+  background: #FFFFFF;
+  border: 1px solid #E9ECF6;
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.malware-result h2 {
+  margin-bottom: 16px;
+}
+
+.malware-result p {
+  margin-bottom: 8px;
+}
+
+.malware-result ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+/* =========================================
+   CYBER SIMULATION MISSION PAGE
+========================================= */
+
+.simulation-mission-page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.simulation-mission-topbar {
+  height: 72px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+}
+
+.simulation-mission-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.simulation-mission-back:hover {
+  color: var(--primary);
+}
+
+.simulation-mission-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary);
+  font-family: "Sora", sans-serif;
+  font-weight: 700;
+}
+
+.simulation-mission-main {
+  width: min(100% - 40px, 1000px);
+  margin: 0 auto;
+  padding: 40px 0 70px;
+}
+
+/* HEADER */
+
+.simulation-mission-header {
+  position: relative;
+  padding: 32px;
+  margin-bottom: 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.simulation-mission-number {
+  margin-bottom: 8px;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.simulation-mission-header h1 {
+  margin-bottom: 10px;
+  font-size: 32px;
+}
+
+.simulation-mission-header p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.simulation-mission-reward {
+  display: inline-flex;
+  margin-top: 18px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #FFF7E6;
+  color: var(--warning);
+  font-weight: 700;
+}
+
+/* SCENARIO */
+
+.simulation-scenario {
+  margin-bottom: 28px;
+}
+
+.simulation-scenario h2,
+.simulation-question h2 {
+  margin-bottom: 16px;
+  font-size: 22px;
+}
+
+.simulation-email-card {
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.simulation-email-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 24px;
+  background: #F8F9FD;
+  border-bottom: 1px solid var(--border);
+}
+
+.simulation-email-header strong {
+  font-size: 16px;
+}
+
+.simulation-email-header span {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.simulation-email-body {
+  padding: 28px 24px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.simulation-email-body p {
+  margin-bottom: 16px;
+}
+
+.simulation-email-link {
+  display: inline-block;
+  margin: 8px 0 18px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: var(--primary);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* QUESTION */
+
+.simulation-question {
+  padding: 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.simulation-options {
+  display: grid;
+  gap: 12px;
+}
+
+.simulation-option {
+  width: 100%;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: white;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.simulation-option:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: #FAF7FF;
+}
+
+.simulation-option.selected {
+  border-color: var(--primary);
+  background: #F3EEFF;
+}
+
+.simulation-option:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+/* SUBMIT */
+
+.simulation-submit-button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 12px;
+  background: var(--primary);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.simulation-submit-button:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.simulation-submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* RESULT */
+
+.simulation-result {
+  margin-top: 20px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  border-radius: 14px;
+}
+
+.simulation-result.correct {
+  background: #ECFDF3;
+  border: 1px solid #BBF7D0;
+  color: #166534;
+}
+
+.simulation-result.wrong {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #991B1B;
+}
+
+.simulation-result h3 {
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.simulation-result p {
+  line-height: 1.5;
+}
+
+.simulation-retry-button {
+  margin-top: 16px;
+  padding: 12px 20px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: white;
+  color: var(--text-primary);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.simulation-retry-button:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+  .simulation-mission-topbar {
+    padding: 0 16px;
+  }
+
+  .simulation-mission-main {
+    width: min(100% - 24px, 1000px);
+    padding-top: 24px;
+  }
+
+  .simulation-mission-header,
+  .simulation-question {
+    padding: 22px;
+  }
+
+  .simulation-mission-header h1 {
+    font-size: 26px;
+  }
+
+  .simulation-scenario h2,
+  .simulation-question h2 {
+    font-size: 19px;
+  }
+
+  .simulation-email-body {
+    padding: 22px;
+  }
+}

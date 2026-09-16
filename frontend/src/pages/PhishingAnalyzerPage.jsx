@@ -30,6 +30,7 @@ import Button from "../components/Button";
 function PhishingEmailAnalyzerPage() {
   const [emailText, setEmailText] = useState("");
   const [analyzed, setAnalyzed] = useState(false);
+  const [analysisResult, setAnalysisResult] = useState(null);
   const [viewMode, setViewMode] = useState("highlighted");
 
   const sampleEmail = `From: security@amaz0n-support.com
@@ -52,49 +53,51 @@ If you do not verify, your account will be permanently locked.
 Thank you,
 Amazon Security Team`;
 
-  const analyzeEmail = () => {
-    if (!emailText.trim()) {
-      return;
-    }
+ const analyzeEmail = async () => {
+  if (!emailText.trim()) {
+    return;
+  }
 
+  try {
+    const response = await fetch(
+      "http://127.0.0.1:8000/api/phishing/check",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email_text: emailText,
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    setAnalysisResult(data);
+    console.log("Phishing API result:", data);
     setAnalyzed(true);
-  };
-
+  } catch (error) {
+    console.error("Phishing analysis failed:", error);
+  }
+};
   const loadSampleEmail = () => {
     setEmailText(sampleEmail);
     setAnalyzed(true);
   };
 
   const getRiskScore = () => {
-    if (!analyzed) {
-      return 0;
-    }
+  if (!analyzed || !analysisResult) {
+    return 0;
+  }
 
-    let score = 0;
-
-    const lower = emailText.toLowerCase();
-
-    if (lower.includes("urgent")) score += 15;
-    if (lower.includes("suspended")) score += 15;
-    if (lower.includes("verify")) score += 10;
-    if (lower.includes("permanently locked")) score += 15;
-    if (lower.includes("http://")) score += 10;
-    if (lower.includes("amaz0n")) score += 15;
-    if (lower.includes("dear customer")) score += 5;
-    if (lower.includes("expire")) score += 5;
-
-    return Math.min(score, 100);
-  };
-
+  return analysisResult.riskScore;
+};
   const riskScore = getRiskScore();
 
-  const riskLevel =
-    riskScore >= 70
-      ? "High Risk"
-      : riskScore >= 40
-      ? "Medium Risk"
-      : "Low Risk";
-
+ const riskLevel = analysisResult
+  ? `${analysisResult.riskLevel} Risk`
+  : "Low Risk";
   const indicators = [
     {
       icon: AlertTriangle,
@@ -683,9 +686,11 @@ Amazon Security Team`;
 
 
               <p className="phishing-ai-intro">
-                {analyzed
-                  ? "This email contains several strong indicators of a phishing attempt."
-                  : "Analyze an email to receive an AI-style explanation of suspicious signals."}
+                {analyzed && analysisResult
+  ? analysisResult.signals.length > 0
+    ? `Detected signals: ${analysisResult.signals.join(", ")}`
+    : "No suspicious signals were detected."
+  : "Analyze an email to receive an AI-style explanation of suspicious signals."}
               </p>
 
 

@@ -30,26 +30,38 @@ function URLSafetyCheckerPage() {
     const [url, setUrl] = useState(
     "https://example-secure-login.com/verify-account"
   );
-
   const [checked, setChecked] = useState(false);
 
-  function analyzeURL() {
+  const [analysisResult, setAnalysisResult] = useState(null);
+async function analyzeURL() {
   if (!url.trim()) {
     return;
   }
 
- const lowerURL = url.toLowerCase();
+  try {
+    const response = await fetch(
+      "http://127.0.0.1:8000/api/url/check",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          url: url,
+        }),
+      }
+    );
 
-if (
-  lowerURL.startsWith("https://") &&
-  !lowerURL.includes("login") &&
-  !lowerURL.includes("verify") &&
-  !lowerURL.includes("account")
-) {
-  setChecked(true);
-} else {
-  setChecked(true);
-}
+    const data = await response.json();
+
+    console.log(data);
+
+    setChecked(true);
+    setAnalysisResult(data);
+    setChecked(true);
+  } catch (error) {
+    console.error("URL analysis failed:", error);
+  }
 }
   return (
     <div className="url-checker-page">
@@ -278,7 +290,13 @@ if (
                     <strong>HTTPS</strong>
                     <span>Secure Connection</span>
                     <b>
-  {url.startsWith("https://") ? "Yes" : "No"}
+  {analysisResult
+  ? analysisResult.https
+    ? "Yes"
+    : "No"
+  : url.startsWith("https://")
+    ? "Yes"
+    : "No"}
 </b>
                   </div>
                 </div>
@@ -349,9 +367,11 @@ if (
 
                   <div>
                     <label>Domain</label>
-                    <strong>
-                       {url.replace(/^https?:\/\//, "").split("/")[0]}
-                    </strong>
+                  <strong>
+  {analysisResult
+    ? analysisResult.domain
+    : url.replace(/^https?:\/\//, "").split("/")[0]}
+</strong>
                   </div>
                 </div>
 
@@ -452,12 +472,11 @@ if (
                   <div>
                     <label>Suspicious Factors</label>
                     <strong>
-                      {url.includes("login") ||
-                       url.includes("verify") ||
-                              url.includes("account")
-                                ? "Potentially suspicious keywords"
-                                : "None detected"}
-                    </strong>
+  {analysisResult &&
+  analysisResult.suspiciousFactors.length > 0
+    ? analysisResult.suspiciousFactors.join(", ")
+    : "None detected"}
+</strong>
                   </div>
                 </div>
 
@@ -469,14 +488,12 @@ if (
 
                   <div>
                     <label>Phishing Signals</label>
-                    <strong>
-                         {url.includes("login") ||
-                         url.includes("verify") ||
-                         url.includes("account") ||
-                         url.includes("urgent")
-                          ? "Potential phishing signals"
-                          : "None detected"}
-                    </strong>
+                   <strong>
+  {analysisResult &&
+  analysisResult.phishingSignals.length > 0
+    ? analysisResult.phishingSignals.join(", ")
+    : "None detected"}
+</strong>
                   </div>
                 </div>
 
@@ -521,17 +538,27 @@ if (
               <div className="risk-circle">
 
                 <div>
-                  <strong>12</strong>
+                 <strong>
+  {analysisResult
+    ? 100 - analysisResult.securityScore
+    : 12}
+</strong>
                   <span>/100</span>
                 </div>
 
               </div>
 
-              <h4>Very Safe</h4>
+              <h4>
+  {analysisResult
+    ? analysisResult.riskLevel
+    : "Very Safe"}
+</h4>
 
               <p>
-                This URL is very likely to be safe.
-              </p>
+  {analysisResult
+    ? `This URL has a ${analysisResult.riskLevel.toLowerCase()} risk level.`
+    : "This URL is very likely to be safe."}
+</p>
 
               <div className="risk-levels">
 

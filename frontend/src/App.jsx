@@ -11,6 +11,7 @@ import PhishingEmailAnalyzerPage from "./pages/PhishingAnalyzerPage";
 import CyberAttackIdentifierPage from "./pages/CyberAttackIdentifierPage";
 import CyberSimulationsPage from "./pages/CyberSimulationsPage";
 import CyberSimulationMissionPage from "./pages/CyberSimulationMissionPage";
+import MalwareAnalyzerPage from "./pages/MalwareAnalyzerPage";
 
 function App() {
   return (
@@ -52,6 +53,28 @@ function App() {
 
       <Route
   path="/cyber-simulations/otp-scam"
+  element={<CyberSimulationMissionPage />}
+/>
+<Route
+  path="/cyber-simulations/fake-whatsapp"
+  element={<CyberSimulationMissionPage />}
+/>
+
+<Route
+  path="/cyber-simulations/fake-job-offer"
+  element={<CyberSimulationMissionPage />}
+/>
+
+<Route
+  path="/cyber-simulations/usb-attack"
+  element={<CyberSimulationMissionPage />}
+/>
+<Route
+  path="/malware-analyzer"
+  element={<MalwareAnalyzerPage />}
+/>
+<Route
+  path="/cyber-simulations/qr-scam"
   element={<CyberSimulationMissionPage />}
 />
     </Routes>

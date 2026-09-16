@@ -23,9 +23,25 @@ function CyberSimulationsPage() {
   const fakeBankEmailCompleted =
     localStorage.getItem("fakeBankEmailCompleted") === "true";
 
+  const otpScamCompleted =
+    localStorage.getItem("otpScamCompleted") === "true";
+
+  const fakeWhatsappCompleted =
+    localStorage.getItem("fakeWhatsappCompleted") === "true";
+
+  const fakeJobOfferCompleted =
+    localStorage.getItem("fakeJobOfferCompleted") === "true";
+
+  const usbAttackCompleted =
+    localStorage.getItem("usbAttackCompleted") === "true";
+
   return (
     <div className="simulation-page">
-      {/* Sidebar */}
+
+      {/* =========================
+          SIDEBAR
+      ========================= */}
+
       <aside className="simulation-sidebar">
 
         <div className="simulation-logo">
@@ -38,7 +54,6 @@ function CyberSimulationsPage() {
             <span>Learn. Defend. Level Up.</span>
           </div>
         </div>
-
 
         <nav className="simulation-nav">
 
@@ -99,8 +114,8 @@ function CyberSimulationsPage() {
 
         </nav>
 
-
         {/* Profile */}
+
         <div className="simulation-profile">
 
           <div className="simulation-avatar">
@@ -114,18 +129,20 @@ function CyberSimulationsPage() {
           </div>
 
           <div className="simulation-profile-xp">
+
             <span>2,450 / 5,000 XP</span>
 
             <ProgressBar
               value={2450}
               max={5000}
             />
+
           </div>
 
         </div>
 
-
         {/* Upgrade */}
+
         <div className="simulation-upgrade">
 
           <div className="simulation-upgrade-icon">
@@ -149,17 +166,23 @@ function CyberSimulationsPage() {
       </aside>
 
 
-      {/* Main */}
+      {/* =========================
+          MAIN
+      ========================= */}
+
       <main className="simulation-main">
 
         {/* Top Bar */}
+
         <header className="simulation-topbar">
 
           <div className="simulation-search">
             <span>⌕</span>
-            <input placeholder="Search simulations..." />
-          </div>
 
+            <input
+              placeholder="Search simulations..."
+            />
+          </div>
 
           <div className="simulation-top-stats">
 
@@ -202,6 +225,7 @@ function CyberSimulationsPage() {
 
 
         {/* Heading */}
+
         <section className="simulation-heading">
 
           <div>
@@ -222,7 +246,6 @@ function CyberSimulationsPage() {
 
           </div>
 
-
           <button className="simulation-how-button">
             <HelpCircle size={16} />
             How it Works
@@ -232,6 +255,7 @@ function CyberSimulationsPage() {
 
 
         {/* Stats */}
+
         <section className="simulation-stats">
 
           <div className="simulation-stat-card">
@@ -305,6 +329,7 @@ function CyberSimulationsPage() {
 
 
         {/* Filters */}
+
         <div className="simulation-filters">
 
           <button className="simulation-filter-active">
@@ -331,6 +356,7 @@ function CyberSimulationsPage() {
           </button>
 
           <select defaultValue="progress">
+
             <option value="progress">
               Sort by: Progress
             </option>
@@ -342,18 +368,23 @@ function CyberSimulationsPage() {
             <option value="xp">
               Sort by: XP
             </option>
+
           </select>
 
         </div>
 
 
-        {/* Beginner */}
+        {/* =========================
+            BEGINNER
+        ========================= */}
+
         <MissionSection
           title="Beginner - Cyber Rookie"
           description="Learn the basics and build strong security habits."
           count="10 Missions"
           type="beginner"
           missions={[
+
             [
               "📨",
               "Fake Bank Email",
@@ -364,20 +395,22 @@ function CyberSimulationsPage() {
               "fake-bank-email",
             ],
 
-          [
-             "🔐",
-            "OTP Scam",
-             localStorage.getItem("otpScamCompleted") === "true"
-            ? "Completed"
-            : "0/10",
-            "+100 XP",
-            "otp-scam",
+            [
+              "🔐",
+              "OTP Scam",
+              otpScamCompleted
+                ? "Completed"
+                : "0/10",
+              "+100 XP",
+              "otp-scam",
             ],
 
             [
               "💬",
               "Fake WhatsApp",
-              "7/10",
+              fakeWhatsappCompleted
+                ? "Completed"
+                : "0/10",
               "+80 XP",
               "fake-whatsapp",
             ],
@@ -391,28 +424,37 @@ function CyberSimulationsPage() {
             ],
 
             [
-              "💾",
+              "🔌",
               "USB Attack",
-              "3/10",
+              usbAttackCompleted
+                ? "Completed"
+                : "0/10",
               "+80 XP",
               "usb-attack",
             ],
+
           ]}
         />
 
 
-        {/* Intermediate */}
+        {/* =========================
+            INTERMEDIATE
+        ========================= */}
+
         <MissionSection
           title="Intermediate - Cyber Defender"
           description="Level up your skills with tricky situations."
           count="10 Missions"
           type="intermediate"
           missions={[
+
             [
               "💼",
               "Fake Job Offer",
-              "Completed",
-              "+120 XP",
+              fakeJobOfferCompleted
+                ? "Completed"
+                : "0/10",
+              "+80 XP",
               "fake-job-offer",
             ],
 
@@ -447,17 +489,22 @@ function CyberSimulationsPage() {
               "+120 XP",
               "malicious-attachment",
             ],
+
           ]}
         />
 
 
-        {/* Advanced */}
+        {/* =========================
+            ADVANCED
+        ========================= */}
+
         <MissionSection
           title="Advanced - Cyber Guardian"
           description="Handle complex threats like a pro."
           count="10 Missions"
           type="advanced"
           missions={[
+
             [
               "📶",
               "WiFi Attack",
@@ -497,20 +544,27 @@ function CyberSimulationsPage() {
               "+200 XP",
               "ddos-attack",
             ],
+
           ]}
         />
 
 
-        {/* Boss Missions */}
+        {/* =========================
+            BOSS MISSIONS
+        ========================= */}
+
         <section className="boss-section">
 
           <div className="mission-section-header">
 
             <div>
+
               <h2>Boss Missions</h2>
+
               <p>
                 High-stakes missions for ultimate champions.
               </p>
+
             </div>
 
             <span>
@@ -548,7 +602,10 @@ function CyberSimulationsPage() {
         </section>
 
 
-        {/* Bottom Progress */}
+        {/* =========================
+            BOTTOM PROGRESS
+        ========================= */}
+
         <section className="simulation-bottom">
 
           <div className="bottom-progress-card">
@@ -567,6 +624,7 @@ function CyberSimulationsPage() {
             </div>
 
             <div className="bottom-xp">
+
               <span>
                 2,450 / 5,000 XP to next level
               </span>
@@ -575,6 +633,7 @@ function CyberSimulationsPage() {
                 value={2450}
                 max={5000}
               />
+
             </div>
 
           </div>
@@ -592,6 +651,7 @@ function CyberSimulationsPage() {
             </div>
 
             <div className="bottom-xp">
+
               <span>
                 Complete 2 more missions to unlock!
               </span>
@@ -600,6 +660,7 @@ function CyberSimulationsPage() {
                 value={28}
                 max={30}
               />
+
             </div>
 
           </div>
@@ -612,10 +673,13 @@ function CyberSimulationsPage() {
             </div>
 
             <div>
+
               <strong>Daily Mission</strong>
+
               <p>
                 Complete any mission today and earn extra XP!
               </p>
+
             </div>
 
             <button>
@@ -635,7 +699,7 @@ function CyberSimulationsPage() {
 
 /* =========================================
    MISSION SECTION
-   ========================================= */
+========================================= */
 
 function MissionSection({
   title,
@@ -650,11 +714,18 @@ function MissionSection({
       <div className="mission-section-header">
 
         <div>
+
           <h2>{title}</h2>
-          <p>{description}</p>
+
+          <p>
+            {description}
+          </p>
+
         </div>
 
-        <span>{count}</span>
+        <span>
+          {count}
+        </span>
 
       </div>
 
@@ -689,7 +760,7 @@ function MissionSection({
 
 /* =========================================
    MISSION CARD
-   ========================================= */
+========================================= */
 
 function MissionCard({
   icon,
@@ -701,20 +772,40 @@ function MissionCard({
 }) {
   const completed = progress === "Completed";
 
+  const handleMissionClick = () => {
+
+    const workingMissions = [
+  "fake-bank-email",
+  "otp-scam",
+  "fake-whatsapp",
+  "qr-scam",
+  "fake-job-offer",
+  "usb-attack",
+];
+
+    if (!workingMissions.includes(missionId)) {
+      return;
+    }
+
+    window.location.href =
+      `/cyber-simulations/${missionId}`;
+  };
+
+
   return (
     <div
       className={`mission-card ${type}`}
-      onClick={() => {
+      onClick={handleMissionClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(event) => {
 
-      if (missionId === "fake-bank-email") {
-        window.location.href =
-        "/cyber-simulations/fake-bank-email";
-      }
-
-      if (missionId === "otp-scam") {
-        window.location.href =
-       "/cyber-simulations/otp-scam";
-      }
+        if (
+          event.key === "Enter" ||
+          event.key === " "
+        ) {
+          handleMissionClick();
+        }
 
       }}
     >
@@ -723,7 +814,9 @@ function MissionCard({
         {icon}
       </div>
 
-      <h3>{title}</h3>
+      <h3>
+        {title}
+      </h3>
 
       <span className="mission-level">
 
@@ -740,9 +833,13 @@ function MissionCard({
 
         <div className="mission-completed">
 
-          <span>Completed</span>
+          <span>
+            Completed
+          </span>
 
-          <small>●</small>
+          <small>
+            ●
+          </small>
 
         </div>
 
@@ -765,7 +862,9 @@ function MissionCard({
 
 
       <div className="mission-xp">
+
         {completed ? "✓" : "⚡"} {xp}
+
       </div>
 
     </div>
@@ -775,7 +874,7 @@ function MissionCard({
 
 /* =========================================
    BOSS CARD
-   ========================================= */
+========================================= */
 
 function BossCard({
   icon,
@@ -792,9 +891,13 @@ function BossCard({
 
       <div className="boss-content">
 
-        <h3>{title}</h3>
+        <h3>
+          {title}
+        </h3>
 
-        <p>{description}</p>
+        <p>
+          {description}
+        </p>
 
         <span className="boss-label">
           Boss
@@ -808,14 +911,19 @@ function BossCard({
 
       <div className="boss-footer">
 
-        <span>0/1</span>
+        <span>
+          0/1
+        </span>
 
-        <strong>{xp}</strong>
+        <strong>
+          {xp}
+        </strong>
 
       </div>
 
     </div>
   );
 }
+
 
 export default CyberSimulationsPage;

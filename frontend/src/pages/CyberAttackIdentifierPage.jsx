@@ -34,14 +34,39 @@ function CyberAttackIdentifierPage() {
 
   const [analyzed, setAnalyzed] = useState(false);
   const [fileName, setFileName] = useState("");
+  const [analysisResult, setAnalysisResult] = useState(null);
 
-  const handleAnalyze = () => {
-    if (incident.trim().length === 0) {
-      return;
-    }
+  const handleAnalyze = async () => {
+  if (incident.trim().length === 0) {
+    return;
+  }
 
+  try {
+    const response = await fetch(
+      "http://127.0.0.1:8000/api/attack/identify",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          incident: incident,
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    console.log("Attack identification result:", data);
+    setAnalysisResult(data);
     setAnalyzed(true);
-  };
+  } catch (error) {
+    console.error(
+      "Attack identification failed:",
+      error
+    );
+  }
+};
 
   const handleFileChange = (event) => {
     const file = event.target.files?.[0];
@@ -272,12 +297,16 @@ function CyberAttackIdentifierPage() {
                     <div>
                       <span>
                         This appears to be a{" "}
-                        <strong>Phishing Attack</strong>
+                        <strong>
+  {analysisResult?.attackType || "Phishing Attack"}
+</strong>
                       </span>
 
-                      <small>
-                        with possible credential harvesting.
-                      </small>
+                     <small>
+  {analysisResult
+    ? `with ${analysisResult.severity.toLowerCase()} severity and ${analysisResult.confidence}% confidence.`
+    : "with possible credential harvesting."}
+</small>
                     </div>
 
                     <CheckCircle size={25} />
@@ -303,11 +332,11 @@ function CyberAttackIdentifierPage() {
                     Attack Type
                   </div>
 
-                  <strong>Phishing Attack</strong>
+                 
 
-                  <span className="attack-high-badge">
-                    High Severity
-                  </span>
+                  <strong>
+  {analysisResult?.attackType || "Phishing Attack"}
+</strong>
                 </div>
 
                 <div className="attack-detail-row">
@@ -320,9 +349,9 @@ function CyberAttackIdentifierPage() {
                   </div>
 
                   <p>
-                    Attackers impersonate a trusted entity to trick users
-                    into revealing sensitive information or credentials.
-                  </p>
+  {analysisResult?.description ||
+    "Attackers impersonate a trusted entity to trick users into revealing sensitive information or credentials."}
+</p>
                 </div>
 
                 <div className="attack-detail-row">
@@ -335,9 +364,9 @@ function CyberAttackIdentifierPage() {
                   </div>
 
                   <p>
-                    Steal credentials, gain unauthorized access to accounts
-                    or systems.
-                  </p>
+  {analysisResult?.commonGoal ||
+    "Steal credentials, gain unauthorized access to accounts or systems."}
+</p>
                 </div>
 
                 <div className="attack-detail-row">
@@ -349,7 +378,9 @@ function CyberAttackIdentifierPage() {
                     MITRE ATT&CK ID
                   </div>
 
-                  <strong>T1566 - Phishing</strong>
+                  <strong>
+  {analysisResult?.mitreId || "T1566 - Phishing"}
+</strong>
                 </div>
 
                 <div className="attack-confidence-row">
@@ -362,10 +393,15 @@ function CyberAttackIdentifierPage() {
                   </div>
 
                   <div className="attack-confidence-bar">
-                    <ProgressBar value={92} max={100} />
+                    <ProgressBar
+  value={analysisResult?.confidence || 92}
+  max={100}
+/>
                   </div>
 
-                  <strong>92%</strong>
+                  <strong>
+  {analysisResult?.confidence || 92}%
+</strong>
                 </div>
               </div>
             </section>
@@ -448,8 +484,9 @@ function CyberAttackIdentifierPage() {
 
               <div className="attack-summary-icon">🥷</div>
 
-              <h2>Phishing Attack</h2>
-
+             <h2>
+  {analysisResult?.attackType || "Phishing Attack"}
+</h2>
               <div className="attack-tags">
                 <span>Social Engineering</span>
                 <span>Credential Theft</span>
@@ -462,12 +499,18 @@ function CyberAttackIdentifierPage() {
               <h3>Confidence Level</h3>
 
               <div className="attack-gauge">
-                <div className="attack-gauge-number">92%</div>
+                <div className="attack-gauge-number">
+  {analysisResult?.confidence || 92}%
+</div>
               </div>
 
               <strong className="attack-very-high">
-                Very High
-              </strong>
+  {analysisResult?.confidence >= 80
+    ? "Very High"
+    : analysisResult?.confidence >= 60
+    ? "High"
+    : "Moderate"}
+</strong>
 
               <p>
                 High confidence in this prediction based on the details
@@ -480,10 +523,10 @@ function CyberAttackIdentifierPage() {
               <h3>🤖 Why this attack?</h3>
 
               <p>
-                The incident involves a deceptive email impersonating a
-                trusted entity, containing a malicious link to a fake login
-                page, leading to credential theft and unauthorized access.
-              </p>
+  {analysisResult
+    ? `The incident was identified as ${analysisResult.attackType}. ${analysisResult.description}`
+    : "The incident involves a deceptive email impersonating a trusted entity, containing a malicious link to a fake login page, leading to credential theft and unauthorized access."}
+</p>
             </section>
 
             {/* Security Tip */}
@@ -520,13 +563,13 @@ function CyberAttackIdentifierPage() {
           </button>
         </section>
 
-        {analyzed && (
-          <div className="attack-success-message">
-            <CheckCircle size={18} />
-            Analysis completed — Phishing Attack identified with 92%
-            confidence.
-          </div>
-        )}
+        {analyzed && analysisResult && (
+  <div className="attack-success-message">
+    <CheckCircle size={18} />
+    Analysis completed — {analysisResult.attackType} identified
+    with {analysisResult.confidence}% confidence.
+  </div>
+)}
       </main>
     </div>
   );

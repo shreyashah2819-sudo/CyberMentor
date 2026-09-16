@@ -16,8 +16,7 @@ import ProgressBar from "../components/ProgressBar";
 function CyberLabPage() {
   return (
     <div className="cyber-lab-page">
-      {/* Page content will be built here */}
-            {/* Sidebar */}
+      {/* Sidebar */}
       <aside className="cyber-lab-sidebar">
         <div className="sidebar-logo">
           <div className="sidebar-logo-icon">
@@ -76,7 +75,8 @@ function CyberLabPage() {
           <Button>Upgrade Now</Button>
         </div>
       </aside>
-            {/* Main Content */}
+
+      {/* Main Content */}
       <main className="cyber-lab-main">
         <div className="cyber-lab-header">
           <div>
@@ -102,22 +102,25 @@ function CyberLabPage() {
         <section className="cyber-lab-stats">
           <div className="stat-card">
             <FlaskConical size={24} />
+
             <div>
               <span>Total Tools</span>
-              <strong>12</strong>
+              <strong>6</strong>
             </div>
           </div>
 
           <div className="stat-card">
             <CheckCircle size={24} />
+
             <div>
               <span>Tools Unlocked</span>
-              <strong>8</strong>
+              <strong>5</strong>
             </div>
           </div>
 
           <div className="stat-card">
             <Trophy size={24} />
+
             <div>
               <span>Lab XP Earned</span>
               <strong>2,450</strong>
@@ -126,6 +129,7 @@ function CyberLabPage() {
 
           <div className="stat-card">
             <Target size={24} />
+
             <div>
               <span>Tools Mastered</span>
               <strong>4</strong>
@@ -137,6 +141,7 @@ function CyberLabPage() {
         <section className="cyber-lab-controls">
           <div className="search-box">
             <Search size={18} />
+
             <input
               type="text"
               placeholder="Search tools..."
@@ -168,193 +173,175 @@ function CyberLabPage() {
             </button>
           </div>
         </section>
-                {/* Cybersecurity Tools */}
+
+        {/* Cybersecurity Tools */}
         <section className="cyber-lab-tools">
 
-          <div className="tool-card">
-            <div className="tool-icon">🟢</div>
-            <h3>Network Scanner</h3>
-            <p>Scan networks and discover active hosts and open ports.</p>
-            <div className="tool-card-bottom">
-              <span className="tool-level beginner">Beginner</span>
-              <button>Open Lab</button>
-            </div>
-          </div>
-
+          {/* Email Analyzer */}
           <div className="tool-card">
             <div className="tool-icon">✉️</div>
+
             <h3>Email Analyzer</h3>
-            <p>Analyze email headers to detect phishing attempts.</p>
+
+            <p>
+              Analyze email headers to detect phishing attempts.
+            </p>
+
             <div className="tool-card-bottom">
-              <span className="tool-level beginner">Beginner</span>
+              <span className="tool-level beginner">
+                Beginner
+              </span>
+
               <button
-               onClick={() =>
-              window.location.href = "/phishing-email-analyzer"
-             }
->                Open Lab
-          </button>
+                onClick={() =>
+                  (window.location.href =
+                    "/phishing-email-analyzer")
+                }
+              >
+                Open Lab
+              </button>
             </div>
           </div>
 
+          {/* Cyber Attack Identifier */}
           <div className="tool-card">
-  <div className="tool-icon">🕵️</div>
+            <div className="tool-icon">🕵️</div>
 
-  <h3>Cyber Attack Identifier</h3>
+            <h3>Cyber Attack Identifier</h3>
 
-  <p>
-    Describe a security incident and let AI identify the possible attack.
-  </p>
+            <p>
+              Describe a security incident and let AI identify
+              the possible attack.
+            </p>
 
-  <div className="tool-card-bottom">
-    <span className="tool-level beginner">Beginner</span>
+            <div className="tool-card-bottom">
+              <span className="tool-level beginner">
+                Beginner
+              </span>
 
-    <button
-      onClick={() =>
-        window.location.href = "/cyber-attack-identifier"
-      }
-    >
-      Open Lab
-    </button>
-  </div>
-</div>
+              <button
+                onClick={() =>
+                  (window.location.href =
+                    "/cyber-attack-identifier")
+                }
+              >
+                Open Lab
+              </button>
+            </div>
+          </div>
 
-    <div className="tool-card">
-  <div className="tool-icon">🎮</div>
+          {/* Cyber Simulations */}
+          <div className="tool-card">
+            <div className="tool-icon">🎮</div>
 
-  <h3>Cyber Simulations</h3>
+            <h3>Cyber Simulations</h3>
 
-  <p>
-    Practice real-world cybersecurity scenarios through interactive missions.
-  </p>
+            <p>
+              Practice real-world cybersecurity scenarios
+              through interactive missions.
+            </p>
 
-  <div className="tool-card-bottom">
-    <span className="tool-level beginner">Beginner</span>
+            <div className="tool-card-bottom">
+              <span className="tool-level beginner">
+                Beginner
+              </span>
 
-    <button
-      onClick={() =>
-        window.location.href = "/cyber-simulations"
-      }
-    >
-      Open Lab
-    </button>
-  </div>
-</div>
+              <button
+                onClick={() =>
+                  (window.location.href =
+                    "/cyber-simulations")
+                }
+              >
+                Open Lab
+              </button>
+            </div>
+          </div>
 
+          {/* URL Inspector */}
           <div className="tool-card">
             <div className="tool-icon">🌐</div>
+
             <h3>URL Inspector</h3>
-            <p>Inspect URLs for safety and identify malicious links.</p>
+
+            <p>
+              Inspect URLs for safety and identify malicious
+              links.
+            </p>
+
             <div className="tool-card-bottom">
-              <span className="tool-level beginner">Beginner</span>
-              <button onClick={() => window.location.href = "/url-safety-checker"}>
-  Open Lab
-</button>
+              <span className="tool-level beginner">
+                Beginner
+              </span>
+
+              <button
+                onClick={() =>
+                  (window.location.href =
+                    "/url-safety-checker")
+                }
+              >
+                Open Lab
+              </button>
             </div>
           </div>
 
-          <div className="tool-card locked">
-            <div className="tool-icon">🦠</div>
-            <h3>Malware Analyzer</h3>
-            <p>Upload files and analyze potential malware behavior.</p>
-            <Lock size={16} />
-            <div className="tool-card-bottom">
-              <span className="tool-level intermediate">Intermediate</span>
-              <button>Open Lab</button>
-            </div>
-          </div>
-
-          <div className="tool-card">
-            <div className="tool-icon">💻</div>
-            <h3>SQL Injection Lab</h3>
-            <p>Test and understand SQL injection vulnerabilities.</p>
-            <div className="tool-card-bottom">
-              <span className="tool-level advanced">Advanced</span>
-              <button>Open Lab</button>
-            </div>
-          </div>
-
-          <div className="tool-card locked">
-            <div className="tool-icon">🛡️</div>
-            <h3>XSS Playground</h3>
-            <p>Experiment with Cross-Site Scripting vulnerabilities.</p>
-            <Lock size={16} />
-            <div className="tool-card-bottom">
-              <span className="tool-level intermediate">Intermediate</span>
-              <button>Open Lab</button>
-            </div>
-          </div>
-
-          <div className="tool-card locked">
-            <div className="tool-icon">📶</div>
-            <h3>WiFi Analyzer</h3>
-            <p>Analyze WiFi networks and detect security issues.</p>
-            <Lock size={16} />
-            <div className="tool-card-bottom">
-              <span className="tool-level intermediate">Intermediate</span>
-              <button>Open Lab</button>
-            </div>
-          </div>
-
+          {/* Password Strength Checker */}
           <div className="tool-card">
             <div className="tool-icon">🔐</div>
+
             <h3>Password Strength Checker</h3>
-            <p>Check password strength and learn how to create strong passwords.</p>
+
+            <p>
+              Check password strength and learn how to create
+              strong passwords.
+            </p>
+
             <div className="tool-card-bottom">
-              <span className="tool-level beginner">Beginner</span>
+              <span className="tool-level beginner">
+                Beginner
+              </span>
+
               <button
-  onClick={() =>
-    window.location.href = "/password-strength"
-  }
+                onClick={() =>
+                  (window.location.href =
+                    "/password-strength")
+                }
+              >
+                Open Lab
+              </button>
+            </div>
+          </div>
+
+          {/* Malware Analyzer */}
+          <div className="tool-card locked">
+            <div className="tool-icon">🦠</div>
+
+            <h3>Malware Analyzer</h3>
+
+            <p>
+              Upload files and analyze potential malware
+              behavior.
+            </p>
+
+            <Lock size={16} />
+
+            <div className="tool-card-bottom">
+              <span className="tool-level intermediate">
+                Intermediate
+              </span>
+
+              <button
+  onClick={() => {
+    window.location.href = "/malware-analyzer";
+  }}
 >
   Open Lab
 </button>
             </div>
           </div>
 
-          <div className="tool-card locked">
-            <div className="tool-icon">👥</div>
-            <h3>Social Engineering Simulator</h3>
-            <p>Test your awareness with realistic social engineering scenarios.</p>
-            <Lock size={16} />
-            <div className="tool-card-bottom">
-              <span className="tool-level intermediate">Intermediate</span>
-              <button>Open Lab</button>
-            </div>
-          </div>
-
-          <div className="tool-card">
-            <div className="tool-icon">🖥️</div>
-            <h3>Command Injection Lab</h3>
-            <p>Understand and exploit command injection vulnerabilities.</p>
-            <div className="tool-card-bottom">
-              <span className="tool-level advanced">Advanced</span>
-              <button>Open Lab</button>
-            </div>
-          </div>
-
-          <div className="tool-card">
-            <div className="tool-icon">📊</div>
-            <h3>DDoS Simulator</h3>
-            <p>Simulate DDoS attacks and learn how to defend against them.</p>
-            <div className="tool-card-bottom">
-              <span className="tool-level advanced">Advanced</span>
-              <button>Open Lab</button>
-            </div>
-          </div>
-
-          <div className="tool-card locked">
-            <div className="tool-icon">📱</div>
-            <h3>Mobile Security Analyzer</h3>
-            <p>Analyze mobile app permissions and security risks.</p>
-            <Lock size={16} />
-            <div className="tool-card-bottom">
-              <span className="tool-level intermediate">Intermediate</span>
-              <button>Open Lab</button>
-            </div>
-          </div>
-
         </section>
-                {/* Learning Banner */}
+
+        {/* Learning Banner */}
         <div className="cyber-lab-learning-banner">
           <div className="learning-banner-icon">
             🤖
@@ -362,6 +349,7 @@ function CyberLabPage() {
 
           <div className="learning-banner-text">
             <h3>New to Cyber Labs?</h3>
+
             <p>
               Practice in a safe environment and build
               real-world cybersecurity skills.
