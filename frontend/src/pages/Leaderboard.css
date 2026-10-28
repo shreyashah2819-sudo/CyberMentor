@@ -1,0 +1,263 @@
+
+.leaderboard-page {
+  min-height: 100vh;
+  padding: 32px;
+  color: #312044;
+  background: linear-gradient(135deg, #fff7fd, #f5f0ff);
+}
+
+.leaderboard-back {
+  padding: 10px 16px;
+  border: 1px solid #e9d5ff;
+  border-radius: 10px;
+  background: white;
+  color: #7e22ce;
+  cursor: pointer;
+}
+
+.leaderboard-header {
+  margin: 28px auto 32px;
+  text-align: center;
+}
+
+.leaderboard-trophy {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 16px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  font-size: 38px;
+  box-shadow: 0 10px 25px #a855f733;
+}
+
+.leaderboard-eyebrow {
+  color: #db2777;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.leaderboard-header h1 {
+  margin: 8px 0;
+  color: #7e22ce;
+  font-size: clamp(30px, 4vw, 42px);
+}
+
+.leaderboard-header > p:last-child {
+  color: #786780;
+  line-height: 1.6;
+}
+
+.leaderboard-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.leaderboard-summary-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px;
+  border: 1px solid #f0d5f5;
+  border-radius: 18px;
+  background: white;
+  box-shadow: 0 8px 24px #a855f714;
+}
+
+.leaderboard-summary-card > span {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #ede9fe, #fce7f3);
+  font-size: 24px;
+}
+
+.leaderboard-summary-card h2 {
+  margin: 0;
+  color: #9333ea;
+  font-size: 24px;
+}
+
+.leaderboard-summary-card p {
+  margin: 5px 0 0;
+  color: #786780;
+  font-size: 13px;
+}
+
+.leaderboard-content {
+  padding: 24px;
+  border: 1px solid #f0d5f5;
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 8px 25px #a855f714;
+}
+
+.leaderboard-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.leaderboard-toolbar h2 {
+  margin: 0 0 6px;
+  color: #6b21a8;
+}
+
+.leaderboard-toolbar p {
+  margin: 0;
+  color: #786780;
+  font-size: 14px;
+}
+
+.leaderboard-toolbar select,
+.leaderboard-search {
+  padding: 12px 14px;
+  border: 1px solid #e9d5ff;
+  border-radius: 10px;
+  background: #fff;
+  color: #312044;
+}
+
+.leaderboard-search {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.leaderboard-toolbar select:focus,
+.leaderboard-search:focus {
+  border-color: #a855f7;
+  outline: 2px solid #e9d5ff;
+}
+
+.leaderboard-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.leaderboard-table th {
+  padding: 15px 12px;
+  background: #f5f0ff;
+  color: #7e22ce;
+  font-size: 13px;
+}
+
+.leaderboard-table td {
+  padding: 16px 12px;
+  border-bottom: 1px solid #f3e8ff;
+  color: #554460;
+  font-size: 14px;
+}
+
+.leaderboard-table tbody tr:hover {
+  background: #fff7fd;
+}
+
+.leaderboard-rank {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: #f3e8ff;
+  color: #7e22ce;
+  font-weight: 800;
+}
+
+.leaderboard-rank.rank-1 {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.leaderboard-rank.rank-2 {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.leaderboard-rank.rank-3 {
+  background: #ffedd5;
+  color: #9a3412;
+}
+
+.leaderboard-player {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.leaderboard-player strong {
+  color: #4c1d95;
+}
+
+.leaderboard-avatar {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  color: white;
+  font-weight: 800;
+}
+
+.leaderboard-points {
+  color: #9333ea !important;
+  font-weight: 700;
+}
+
+.leaderboard-empty {
+  padding: 24px;
+  text-align: center;
+  color: #786780;
+}
+
+.leaderboard-note {
+  margin-top: 22px;
+  padding: 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f3e8ff, #fce7f3);
+  color: #7e22ce;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 800px) {
+  .leaderboard-page {
+    padding: 22px 16px;
+  }
+
+  .leaderboard-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .leaderboard-content {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .leaderboard-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .leaderboard-toolbar select {
+    width: 100%;
+  }
+}
