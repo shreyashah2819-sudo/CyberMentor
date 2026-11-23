@@ -1,15 +1,8 @@
-function Button({
-  children,
-  onClick,
-  type = "button",
-  variant = "primary",
-}) {
+// variant: "primary" | "secondary" | "ghost"
+function Button({ variant = "primary", block = false, className = "", children, ...props }) {
+  const cls = `btn btn-${variant}${block ? " btn-block" : ""} ${className}`.trim();
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      className={`button button-${variant}`}
-    >
+    <button className={cls} {...props}>
       {children}
     </button>
   );
