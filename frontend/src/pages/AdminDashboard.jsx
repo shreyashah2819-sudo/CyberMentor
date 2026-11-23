@@ -20,7 +20,7 @@ function AdminDashboard() {
     { name: "User Management", icon: "♙", path: "/admin/users" },
     { name: "Content Management", icon: "▤", path: "/admin/content" },
     { name: "Simulation Management", icon: "◈", path: "/admin/simulations" },
-    { name: "Analytics", icon: "▥", path: "/analytics" },
+    { name: "Analytics", icon: "▥", path: "/admin/analytics" },
     { name: "Settings", icon: "⚙", path: "/settings" },
   ];
 
@@ -234,7 +234,7 @@ function AdminDashboard() {
 
             <button
               className="admin-action-card"
-              onClick={() => navigate("/analytics")}
+              onClick={() => navigate("/admin/analytics")}
             >
               <span className="admin-action-icon orange">▥</span>
               <span><strong>View Analytics</strong><small>Track platform performance</small></span>

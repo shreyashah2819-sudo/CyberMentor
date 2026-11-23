@@ -10,10 +10,16 @@ import {
   Lock,
   ArrowRight,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import ProgressBar from "../components/ProgressBar";
+import "./cyber-lab-page.css";
+
 
 function CyberLabPage() {
+  const navigate = useNavigate();
+
+  
   return (
     <div className="cyber-lab-page">
       {/* Sidebar */}
@@ -29,24 +35,51 @@ function CyberLabPage() {
           </div>
         </div>
 
-        <nav className="cyber-lab-nav">
-          <button>⌂ <span>Home</span></button>
-          <button>▣ <span>Cyber Academy</span></button>
-          <button>🤖 <span>AI Mentor</span></button>
-          <button>⚙ <span>Challenges</span></button>
+       <nav className="cyber-lab-nav">
+  <button onClick={() => navigate("/")}>
+    ⌂ <span>Home</span>
+  </button>
 
-          <button className="active">
-            <FlaskConical size={18} />
-            <span>Cyber Lab</span>
-          </button>
+  <button onClick={() => navigate("/cyber-academy")}>
+    ▣ <span>Cyber Academy</span>
+  </button>
 
-          <button>▣ <span>Story Mode</span></button>
-          <button>♢ <span>Badges</span></button>
-          <button>♙ <span>Leaderboards</span></button>
-          <button>♙ <span>Profile</span></button>
-          <button>⚙ <span>Settings</span></button>
-        </nav>
+  <button onClick={() => navigate("/ai-mentor")}>
+    🤖 <span>AI Mentor</span>
+  </button>
 
+  <button onClick={() => navigate("/challenges")}>
+    ⚙ <span>Challenges</span>
+  </button>
+
+  <button
+    className="active"
+    onClick={() => navigate("/cyber-lab")}
+  >
+    <FlaskConical size={18} />
+    <span>Cyber Lab</span>
+  </button>
+
+  <button onClick={() => navigate("/cyber-simulations")}>
+    ▣ <span>Story Mode</span>
+  </button>
+
+  <button onClick={() => navigate("/achievements")}>
+    ♢ <span>Badges</span>
+  </button>
+
+  <button onClick={() => navigate("/leaderboard")}>
+    ♙ <span>Leaderboards</span>
+  </button>
+
+  <button onClick={() => navigate("/profile")}>
+    ♙ <span>Profile</span>
+  </button>
+
+  <button onClick={() => navigate("/settings")}>
+    ⚙ <span>Settings</span>
+  </button>
+</nav>
         <div className="sidebar-profile">
           <div className="profile-avatar">👩🏻</div>
 

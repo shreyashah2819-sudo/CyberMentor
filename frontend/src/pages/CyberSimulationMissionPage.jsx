@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 
 import "../App.css";
+import "./CyberSimulationMissionPage.css";
 
 const missions = {
   "fake-bank-email": {

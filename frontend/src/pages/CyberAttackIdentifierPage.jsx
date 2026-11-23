@@ -26,6 +26,7 @@ import {
 
 import Button from "../components/Button";
 import ProgressBar from "../components/ProgressBar";
+import "./CyberAttackIdentifierPage.css";
 
 function CyberAttackIdentifierPage() {
   const [incident, setIncident] = useState(

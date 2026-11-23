@@ -23,8 +23,9 @@ import {
   Lightbulb,
 } from "lucide-react";
 
-import ProgressBar from "../components/progressBar";
+import ProgressBar from "../components/ProgressBar";
 import Button from "../components/Button";
+import "./URLSafetyCheckerPage.css";
 
 function URLSafetyCheckerPage() {
     const [url, setUrl] = useState(

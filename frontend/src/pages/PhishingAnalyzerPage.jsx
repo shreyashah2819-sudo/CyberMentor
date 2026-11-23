@@ -25,6 +25,8 @@ import {
 
 import ProgressBar from "../components/ProgressBar";
 import Button from "../components/Button";
+import "./PhishingAnalyzerPage.css";
+
 
 
 function PhishingEmailAnalyzerPage() {

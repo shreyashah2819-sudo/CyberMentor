@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 
 import ProgressBar from "../components/ProgressBar";
+import "./CyberSimulationsPage.css";
 
 function CyberSimulationsPage() {
   const fakeBankEmailCompleted =

@@ -1,0 +1,564 @@
+/* =========================================
+   CyberMentor - Cyber Simulation Mission
+   ========================================= */
+
+.simulation-mission-page {
+  min-height: 100vh;
+  width: 100%;
+  background: #f8faff;
+  color: #171725;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.simulation-mission-page *,
+.simulation-mission-page *::before,
+.simulation-mission-page *::after {
+  box-sizing: border-box;
+}
+
+/* Top navigation */
+
+.simulation-mission-topbar {
+  width: 100%;
+  min-height: 76px;
+  padding: 16px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: #ffffff;
+  border-bottom: 1px solid #e9ecf6;
+}
+
+.simulation-mission-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 10px 15px;
+  background: #ffffff;
+  color: #55556b;
+  border: 1px solid #e5e7f1;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, transform 0.2s ease;
+}
+
+.simulation-mission-back:hover {
+  background: #f4efff;
+  color: #7c3aed;
+  border-color: #d8c6ff;
+  transform: translateX(-2px);
+}
+
+.simulation-mission-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #7c3aed;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.simulation-mission-logo svg {
+  flex-shrink: 0;
+}
+
+/* Main content */
+
+.simulation-mission-main {
+  width: min(100% - 40px, 1050px);
+  margin: 0 auto;
+  padding: 38px 0 70px;
+}
+
+/* Mission heading */
+
+.simulation-mission-header {
+  position: relative;
+  padding: 32px;
+  margin-bottom: 28px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffffff 0%, #f3edff 100%);
+  border: 1px solid #e8defe;
+  border-radius: 22px;
+  box-shadow: 0 8px 30px rgba(64, 35, 120, 0.05);
+}
+
+.simulation-mission-header::after {
+  content: "";
+  position: absolute;
+  top: -65px;
+  right: -45px;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: rgba(124, 58, 237, 0.07);
+  pointer-events: none;
+}
+
+.simulation-mission-number {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  margin: 0 0 15px;
+  color: #7c3aed;
+  background: #eee5ff;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.simulation-mission-header h1 {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 10px;
+  color: #171725;
+  font-size: clamp(27px, 4vw, 36px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+
+.simulation-mission-header > p:not(.simulation-mission-number) {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  max-width: 650px;
+  color: #66667a;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.simulation-mission-reward {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 9px 14px;
+  color: #7c3aed;
+  background: #ffffff;
+  border: 1px solid #e6d9ff;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+/* Scenario section */
+
+.simulation-scenario,
+.simulation-question {
+  padding: 28px;
+  margin-bottom: 24px;
+  background: #ffffff;
+  border: 1px solid #e9ecf6;
+  border-radius: 20px;
+  box-shadow: 0 7px 24px rgba(37, 31, 70, 0.035);
+}
+
+.simulation-scenario > h2,
+.simulation-question > h2 {
+  margin: 0 0 22px;
+  color: #202033;
+  font-size: 20px;
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+/* Simulated email/message */
+
+.simulation-email-card {
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e5e7f1;
+  border-radius: 14px;
+}
+
+.simulation-email-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 22px;
+  background: #faf9ff;
+  border-bottom: 1px solid #e9ecf6;
+}
+
+.simulation-email-header strong {
+  color: #29233e;
+  font-size: 15px;
+  font-weight: 750;
+}
+
+.simulation-email-header span {
+  color: #77758b;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.simulation-email-body {
+  padding: 24px;
+  color: #49495d;
+  font-size: 14px;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+
+.simulation-email-body p {
+  margin: 0 0 15px;
+}
+
+.simulation-email-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Suspicious email link */
+
+.simulation-email-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  margin: 3px 0 16px;
+  padding: 11px 18px;
+  color: #ffffff;
+  background: #7c3aed;
+  border: none;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: default;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.16);
+}
+
+/* QR-code placeholder */
+
+.simulation-qr-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  margin: 20px 0;
+  color: #37304b;
+  background:
+    repeating-conic-gradient(
+      #242033 0% 25%,
+      #ffffff 0% 50%
+    ) 0 0 / 16px 16px;
+  border: 8px solid #ffffff;
+  outline: 1px solid #e5e0f2;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 900;
+  text-align: center;
+  text-shadow:
+    -2px -2px 0 #ffffff,
+    2px -2px 0 #ffffff,
+    -2px 2px 0 #ffffff,
+    2px 2px 0 #ffffff;
+}
+
+/* Answer options */
+
+.simulation-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.simulation-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  width: 100%;
+  min-height: 60px;
+  padding: 17px 18px;
+  color: #48485d;
+  background: #ffffff;
+  border: 1px solid #e5e7f1;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.simulation-option::before {
+  content: "";
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  background: #ffffff;
+  border: 2px solid #d5d3e2;
+  border-radius: 50%;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.simulation-option:hover:not(:disabled) {
+  background: #fbf9ff;
+  border-color: #cbb5ff;
+  transform: translateY(-1px);
+}
+
+.simulation-option.selected {
+  color: #5425ad;
+  background: #f5f0ff;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.07);
+}
+
+.simulation-option.selected::before {
+  background: #7c3aed;
+  border: 5px solid #7c3aed;
+  box-shadow: inset 0 0 0 2px #ffffff;
+}
+
+.simulation-option:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+/* Submit button */
+
+.simulation-submit-button,
+.simulation-retry-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 49px;
+  margin-top: 22px;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.simulation-submit-button {
+  color: #ffffff;
+  background: #7c3aed;
+  box-shadow: 0 5px 14px rgba(124, 58, 237, 0.17);
+}
+
+.simulation-submit-button:hover:not(:disabled) {
+  background: #6d28d9;
+  transform: translateY(-1px);
+  box-shadow: 0 7px 18px rgba(124, 58, 237, 0.22);
+}
+
+.simulation-submit-button:disabled {
+  color: #aaa6b8;
+  background: #e9e6f0;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.simulation-retry-button {
+  color: #7c3aed;
+  background: #f1eaff;
+  border: 1px solid #e2d3ff;
+}
+
+.simulation-retry-button:hover {
+  background: #e8dcff;
+  transform: translateY(-1px);
+}
+
+/* Answer feedback */
+
+.simulation-result {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  margin-top: 22px;
+  padding: 20px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+}
+
+.simulation-result > svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.simulation-result h3 {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.simulation-result p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.simulation-result.correct {
+  color: #087443;
+  background: #eaf9f0;
+  border-color: #bce9ce;
+}
+
+.simulation-result.wrong {
+  color: #b42336;
+  background: #fff0f1;
+  border-color: #ffcbd1;
+}
+
+/* Mission not found */
+
+.simulation-mission-page > h1 {
+  margin: 0;
+  padding: 60px 24px 15px;
+  color: #202033;
+  font-size: 28px;
+  text-align: center;
+}
+
+.simulation-mission-page > button {
+  display: block;
+  margin: 10px auto;
+  padding: 12px 18px;
+  color: #ffffff;
+  background: #7c3aed;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Keyboard accessibility */
+
+.simulation-mission-page button:focus-visible {
+  outline: 3px solid rgba(124, 58, 237, 0.35);
+  outline-offset: 3px;
+}
+
+/* Tablet */
+
+@media (max-width: 768px) {
+  .simulation-mission-topbar {
+    min-height: 68px;
+    padding: 13px 20px;
+  }
+
+  .simulation-mission-logo {
+    font-size: 18px;
+  }
+
+  .simulation-mission-main {
+    width: calc(100% - 32px);
+    padding-top: 25px;
+  }
+
+  .simulation-mission-header {
+    padding: 26px;
+    border-radius: 18px;
+  }
+
+  .simulation-scenario,
+  .simulation-question {
+    padding: 23px;
+    border-radius: 17px;
+  }
+
+  .simulation-scenario > h2,
+  .simulation-question > h2 {
+    font-size: 18px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+  .simulation-mission-topbar {
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .simulation-mission-back {
+    gap: 6px;
+    padding: 9px 10px;
+    font-size: 12px;
+  }
+
+  .simulation-mission-logo {
+    gap: 6px;
+    font-size: 16px;
+  }
+
+  .simulation-mission-logo svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .simulation-mission-main {
+    width: calc(100% - 24px);
+    padding: 20px 0 40px;
+  }
+
+  .simulation-mission-header {
+    padding: 22px 19px;
+    margin-bottom: 17px;
+  }
+
+  .simulation-mission-header h1 {
+    font-size: 26px;
+  }
+
+  .simulation-mission-header > p:not(.simulation-mission-number) {
+    font-size: 14px;
+  }
+
+  .simulation-scenario,
+  .simulation-question {
+    padding: 18px;
+    margin-bottom: 17px;
+  }
+
+  .simulation-scenario > h2,
+  .simulation-question > h2 {
+    margin-bottom: 17px;
+    font-size: 17px;
+  }
+
+  .simulation-email-header {
+    padding: 16px;
+  }
+
+  .simulation-email-body {
+    padding: 17px;
+    font-size: 13px;
+  }
+
+  .simulation-option {
+    min-height: 55px;
+    padding: 14px;
+    font-size: 13px;
+  }
+
+  .simulation-result {
+    padding: 15px;
+  }
+}
